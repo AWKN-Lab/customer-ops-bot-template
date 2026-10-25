@@ -1,0 +1,92 @@
+==============================================================
+instance: retail  (example-retail.yaml)
+template: template/bot.template.yaml
+python:   Python 3.11.2
+pyyaml:   6.0.3
+--------------------------------------------------------------
+== instance: /workspace/work/bid-1502/instances/example-retail.yaml
+  [PASS] required parameter present and non-empty: tenant_name
+  [PASS] required parameter present and non-empty: locale
+  [PASS] required parameter present and non-empty: tone_policy
+  [PASS] required parameter present and non-empty: escalation_policy
+  [PASS] required parameter present and non-empty: intent_catalog
+  [PASS] required parameter present and non-empty: intents
+  [PASS] required parameter present and non-empty: knowledge_base
+  [PASS] required parameter present and non-empty: tool_bindings
+  [PASS] intent names are unique — 3 intents
+  [PASS] intent 'order_status' has at least one keyword
+  [PASS] intent 'returns' has at least one keyword
+  [PASS] intent 'store_hours' has at least one keyword
+  [PASS] intent 'order_status' has all required tools bound — order_lookup
+  [PASS] intent 'returns' has all required tools bound — no tool required
+  [PASS] intent 'store_hours' has all required tools bound — no tool required
+== behaviour
+  [PASS] template renders without unresolved slots
+  [PASS] rendered prompt contains no leftover {{slot}}
+  [PASS] rendered prompt names the tenant
+  [PASS] intent 'order_status' routes and answers — route=order_status tools=['order_lookup']
+  [PASS] intent 'order_status' reply stays inside the length limit — 237 chars
+  [PASS] intent 'order_status' made no forbidden claim
+  [PASS] intent 'returns' routes and answers — route=returns tools=[]
+  [PASS] intent 'returns' reply stays inside the length limit — 176 chars
+  [PASS] intent 'returns' made no forbidden claim
+  [PASS] intent 'store_hours' routes and answers — route=store_hours tools=[]
+  [PASS] intent 'store_hours' reply stays inside the length limit — 152 chars
+  [PASS] intent 'store_hours' made no forbidden claim
+  [PASS] out-of-catalog request is refused and escalated — route=None escalated=True
+  [PASS] redaction guard removes contact-like strings from knowledge content — write to [redacted] or quote [redacted]
+  [PASS] intent 'order_status' leaks no contact-like string to the customer — leaked=[]
+  [PASS] the customer's own reference is echoed back, not redacted — Order status: I can look up the delivery status for that order. Your parcel is dispatched 
+
+== 31/31 checks passed
+exit_code: 0
+
+==============================================================
+instance: saas  (example-saas.yaml)
+template: template/bot.template.yaml
+python:   Python 3.11.2
+pyyaml:   6.0.3
+--------------------------------------------------------------
+== instance: /workspace/work/bid-1502/instances/example-saas.yaml
+  [PASS] required parameter present and non-empty: tenant_name
+  [PASS] required parameter present and non-empty: locale
+  [PASS] required parameter present and non-empty: tone_policy
+  [PASS] required parameter present and non-empty: escalation_policy
+  [PASS] required parameter present and non-empty: intent_catalog
+  [PASS] required parameter present and non-empty: intents
+  [PASS] required parameter present and non-empty: knowledge_base
+  [PASS] required parameter present and non-empty: tool_bindings
+  [PASS] intent names are unique — 3 intents
+  [PASS] intent 'plan_limits' has at least one keyword
+  [PASS] intent 'invoice' has at least one keyword
+  [PASS] intent 'api_status' has at least one keyword
+  [PASS] intent 'plan_limits' has all required tools bound — no tool required
+  [PASS] intent 'invoice' has all required tools bound — billing_lookup
+  [PASS] intent 'api_status' has all required tools bound — no tool required
+== behaviour
+  [PASS] template renders without unresolved slots
+  [PASS] rendered prompt contains no leftover {{slot}}
+  [PASS] rendered prompt names the tenant
+  [PASS] intent 'plan_limits' routes and answers — route=plan_limits tools=[]
+  [PASS] intent 'plan_limits' reply stays inside the length limit — 151 chars
+  [PASS] intent 'plan_limits' made no forbidden claim
+  [PASS] intent 'invoice' routes and answers — route=invoice tools=['billing_lookup']
+  [PASS] intent 'invoice' reply stays inside the length limit — 121 chars
+  [PASS] intent 'invoice' made no forbidden claim
+  [PASS] intent 'api_status' routes and answers — route=api_status tools=[]
+  [PASS] intent 'api_status' reply stays inside the length limit — 117 chars
+  [PASS] intent 'api_status' made no forbidden claim
+  [PASS] out-of-catalog request is refused and escalated — route=None escalated=True
+  [PASS] redaction guard removes contact-like strings from knowledge content — write to [redacted] or quote [redacted]
+  [PASS] the customer's own reference is echoed back, not redacted — Plan limits: The Growth plan includes 50 seats and 20k API calls per hour, and the request
+
+== 30/30 checks passed
+exit_code: 0
+
+== merged report: instances=2/2 all_passed=True
+   example-retail.yaml: 31/31 passed
+   example-saas.yaml: 30/30 passed
+==============================================================
+OVERALL: PASS
+log:    /workspace/work/bid-1502/evidence/run.log
+report: /workspace/work/bid-1502/evidence/report.json

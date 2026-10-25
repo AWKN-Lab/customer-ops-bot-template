@@ -1,0 +1,55 @@
+# Instantiation contract for customer-ops-bot
+# Every instance MUST satisfy this before it can be rendered.
+# Validation lives in checks/check_instance.py — it is executable, not prose.
+
+schema_version: "1.0.0"
+template_id: customer-ops-bot
+
+parameters:
+  tenant_name:
+    type: string
+    required: true
+    description: Legal or trading name shown to the customer.
+  locale:
+    type: string
+    required: true
+    description: BCP-47 locale the replies are written in.
+  tone_policy:
+    type: string
+    required: true
+    description: One line describing the required tone.
+  escalation_policy:
+    type: string
+    required: true
+    description: What the bot does when it cannot complete a request.
+  intent_catalog:
+    type: string
+    required: true
+    description: Human-readable list of what the deployment supports.
+  intents:
+    type: list
+    required: true
+    item_required: [name, label, keywords, requires_tools, reply]
+    description: >
+      The intent table. `name` is the routing key, `keywords` drive the
+      reference router, `requires_tools` lists the bindings that must exist
+      for the intent to be answerable, `reply` is the answer body.
+  knowledge_base:
+    type: string
+    required: true
+    description: The knowledge the bot is allowed to answer from.
+  tool_bindings:
+    type: map
+    required: true
+    description: >
+      Tool name -> contract. A tool is either bound (name present) or absent.
+      An intent whose `requires_tools` are not bound escalates instead of
+      answering.
+
+validation_rules:
+  - "No parameter may be empty or whitespace-only."
+  - "Every intent name must be unique."
+  - "Every intent requires at least one keyword, otherwise it is unroutable."
+  - "Every name in `requires_tools` must exist in `tool_bindings`, or the intent
+     is expected to escalate — the check asserts the escalation happens."
+  - "No value may contain an unresolved {{slot}} after rendering."

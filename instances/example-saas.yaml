@@ -1,0 +1,49 @@
+# Worked example instance 2 — SaaS.
+# Deliberately different tenant, locale, intent set and tool bindings, so the
+# two examples exercise the same template rather than the same parameters.
+
+tenant_name: "Helios Cloud"
+locale: "en-US"
+tone_policy: "direct, technical, no marketing language"
+escalation_policy: >
+  Escalate to the support engineer on duty and give the customer the ticket
+  reference in the same reply.
+intent_catalog: "plan limits, invoice query, API status"
+
+intents:
+  - name: plan_limits
+    label: "Plan limits"
+    keywords: ["plan", "quota", "limit", "rate", "seats"]
+    requires_tools: []
+    reply: >
+      The Growth plan includes 50 seats and 20k API calls per hour, and the
+      request rate limit is enforced per API key rather than per account.
+  - name: invoice
+    label: "Invoice query"
+    keywords: ["invoice", "billing", "charge", "refund", "payment"]
+    requires_tools: ["billing_lookup"]
+    reply: >
+      I can pull the invoice up for you. The most recent one covers the
+      previous billing period and is settled.
+  - name: api_status
+    label: "API status"
+    keywords: ["api", "status", "outage", "latency", "downtime"]
+    requires_tools: []
+    reply: >
+      All public endpoints are operational, and p95 latency on the v2 API is
+      currently under 180 milliseconds.
+
+knowledge_base: >
+  Helios Cloud is a hosted API platform with a 99.95 percent uptime commitment
+  on paid plans. The Growth plan includes 50 seats and 20k API calls per hour,
+  and the request rate limit is enforced per API key rather than per account.
+  All public endpoints are operational, and p95 latency on the v2 API is
+  currently under 180 milliseconds. Invoices are issued at the end of each
+  billing period and are settled by direct debit.
+
+tool_bindings:
+  billing_lookup:
+    contract: "billing_lookup(account_id) -> {last_invoice, amount, status}"
+    returns: "last invoice id, amount, settlement status"
+    side_effects: none
+    auth: service-account, read-only

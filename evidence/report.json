@@ -1,0 +1,328 @@
+{
+  "instances": [
+    {
+      "instance": "/workspace/work/bid-1502/instances/example-retail.yaml",
+      "template": "/workspace/work/bid-1502/template/bot.template.yaml",
+      "passed": 31,
+      "total": 31,
+      "failed": [],
+      "checks": [
+        {
+          "check": "required parameter present and non-empty: tenant_name",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: locale",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: tone_policy",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: escalation_policy",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: intent_catalog",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: intents",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: knowledge_base",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: tool_bindings",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent names are unique",
+          "passed": true,
+          "detail": "3 intents"
+        },
+        {
+          "check": "intent 'order_status' has at least one keyword",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'returns' has at least one keyword",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'store_hours' has at least one keyword",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'order_status' has all required tools bound",
+          "passed": true,
+          "detail": "order_lookup"
+        },
+        {
+          "check": "intent 'returns' has all required tools bound",
+          "passed": true,
+          "detail": "no tool required"
+        },
+        {
+          "check": "intent 'store_hours' has all required tools bound",
+          "passed": true,
+          "detail": "no tool required"
+        },
+        {
+          "check": "template renders without unresolved slots",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "rendered prompt contains no leftover {{slot}}",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "rendered prompt names the tenant",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'order_status' routes and answers",
+          "passed": true,
+          "detail": "route=order_status tools=['order_lookup']"
+        },
+        {
+          "check": "intent 'order_status' reply stays inside the length limit",
+          "passed": true,
+          "detail": "237 chars"
+        },
+        {
+          "check": "intent 'order_status' made no forbidden claim",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'returns' routes and answers",
+          "passed": true,
+          "detail": "route=returns tools=[]"
+        },
+        {
+          "check": "intent 'returns' reply stays inside the length limit",
+          "passed": true,
+          "detail": "176 chars"
+        },
+        {
+          "check": "intent 'returns' made no forbidden claim",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'store_hours' routes and answers",
+          "passed": true,
+          "detail": "route=store_hours tools=[]"
+        },
+        {
+          "check": "intent 'store_hours' reply stays inside the length limit",
+          "passed": true,
+          "detail": "152 chars"
+        },
+        {
+          "check": "intent 'store_hours' made no forbidden claim",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "out-of-catalog request is refused and escalated",
+          "passed": true,
+          "detail": "route=None escalated=True"
+        },
+        {
+          "check": "redaction guard removes contact-like strings from knowledge content",
+          "passed": true,
+          "detail": "write to [redacted] or quote [redacted]"
+        },
+        {
+          "check": "intent 'order_status' leaks no contact-like string to the customer",
+          "passed": true,
+          "detail": "leaked=[]"
+        },
+        {
+          "check": "the customer's own reference is echoed back, not redacted",
+          "passed": true,
+          "detail": "Order status: I can look up the delivery status for that order. Your parcel is dispatched "
+        }
+      ]
+    },
+    {
+      "instance": "/workspace/work/bid-1502/instances/example-saas.yaml",
+      "template": "/workspace/work/bid-1502/template/bot.template.yaml",
+      "passed": 30,
+      "total": 30,
+      "failed": [],
+      "checks": [
+        {
+          "check": "required parameter present and non-empty: tenant_name",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: locale",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: tone_policy",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: escalation_policy",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: intent_catalog",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: intents",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: knowledge_base",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "required parameter present and non-empty: tool_bindings",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent names are unique",
+          "passed": true,
+          "detail": "3 intents"
+        },
+        {
+          "check": "intent 'plan_limits' has at least one keyword",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'invoice' has at least one keyword",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'api_status' has at least one keyword",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'plan_limits' has all required tools bound",
+          "passed": true,
+          "detail": "no tool required"
+        },
+        {
+          "check": "intent 'invoice' has all required tools bound",
+          "passed": true,
+          "detail": "billing_lookup"
+        },
+        {
+          "check": "intent 'api_status' has all required tools bound",
+          "passed": true,
+          "detail": "no tool required"
+        },
+        {
+          "check": "template renders without unresolved slots",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "rendered prompt contains no leftover {{slot}}",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "rendered prompt names the tenant",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'plan_limits' routes and answers",
+          "passed": true,
+          "detail": "route=plan_limits tools=[]"
+        },
+        {
+          "check": "intent 'plan_limits' reply stays inside the length limit",
+          "passed": true,
+          "detail": "151 chars"
+        },
+        {
+          "check": "intent 'plan_limits' made no forbidden claim",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'invoice' routes and answers",
+          "passed": true,
+          "detail": "route=invoice tools=['billing_lookup']"
+        },
+        {
+          "check": "intent 'invoice' reply stays inside the length limit",
+          "passed": true,
+          "detail": "121 chars"
+        },
+        {
+          "check": "intent 'invoice' made no forbidden claim",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "intent 'api_status' routes and answers",
+          "passed": true,
+          "detail": "route=api_status tools=[]"
+        },
+        {
+          "check": "intent 'api_status' reply stays inside the length limit",
+          "passed": true,
+          "detail": "117 chars"
+        },
+        {
+          "check": "intent 'api_status' made no forbidden claim",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "check": "out-of-catalog request is refused and escalated",
+          "passed": true,
+          "detail": "route=None escalated=True"
+        },
+        {
+          "check": "redaction guard removes contact-like strings from knowledge content",
+          "passed": true,
+          "detail": "write to [redacted] or quote [redacted]"
+        },
+        {
+          "check": "the customer's own reference is echoed back, not redacted",
+          "passed": true,
+          "detail": "Plan limits: The Growth plan includes 50 seats and 20k API calls per hour, and the request"
+        }
+      ]
+    }
+  ],
+  "all_passed": true
+}

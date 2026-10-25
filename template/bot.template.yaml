@@ -1,0 +1,62 @@
+# customer-ops-bot — reusable template package
+# Template: placeholders in {{double_braces}} are filled from an instance file.
+# Instances are validated against instances/instance.schema.yaml before render.
+
+version: "1.0.0"
+template_id: customer-ops-bot
+
+# --- Role / system prompt template -----------------------------------------
+# Slots: {{tenant_name}} {{locale}} {{tone_policy}} {{escalation_policy}}
+#        {{intent_catalog}} {{intents}} {{knowledge_base}} {{tool_bindings}}
+system_prompt: |
+  You are the customer-operations assistant for {{tenant_name}}.
+  Locale: {{locale}}.
+  Tone policy: {{tone_policy}}.
+
+  Your job: identify the customer's intent, then answer using the bound
+  knowledge and tools. Never invent a policy, a price, or a delivery date.
+
+  Escalation policy: {{escalation_policy}}
+
+  Supported intents and their required tools:
+  {{intents}}
+
+  Bound knowledge:
+  {{knowledge_base}}
+
+  Tool bindings (name -> contract):
+  {{tool_bindings}}
+
+  If a request needs a tool that is not bound, say the request is out of
+  scope for this deployment and escalate per policy. If a request is outside
+  the intent catalog, refuse in one sentence and offer the escalation path.
+
+# --- Slot catalogue --------------------------------------------------------
+slots:
+  tenant_name:      {required: true,  type: string}
+  locale:           {required: true,  type: string}
+  tone_policy:      {required: true,  type: string}
+  escalation_policy: {required: true,  type: string}
+  intent_catalog:   {required: true,  type: string}
+  intents:          {required: true,  type: list}
+  knowledge_base:   {required: true,  type: string}
+  tool_bindings:    {required: true,  type: map}
+
+# --- Guardrails ------------------------------------------------------------
+guardrails:
+  max_reply_chars: 600
+  refuse_out_of_catalog: true
+  forbid_claims: ["guaranteed delivery date", "guaranteed price", "policy exception"]
+  redact_patterns:
+    - "(?i)\\b\\d{6,}\\b"              # long digit runs -> order ids
+    - "(?i)\\b[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}\\b"   # emails
+  on_missing_tool: escalate
+  on_unknown_intent: refuse_and_escalate
+
+# --- Response contract -----------------------------------------------------
+response_contract:
+  route_to: one of the intent names in `intents`
+  confidence: 0.0 - 1.0
+  reply: text
+  used_tools: list of bound tool names
+  escalated: bool

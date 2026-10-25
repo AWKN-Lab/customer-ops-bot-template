@@ -1,0 +1,53 @@
+# Worked example instance 1 — retail.
+# Synthetic data only: no real account, customer or order id appears here.
+
+tenant_name: "Northwind Retail"
+locale: "en-GB"
+tone_policy: "warm, concise, no exclamation marks"
+escalation_policy: >
+  Escalate to a human agent within one working day, and tell the customer
+  that a human will follow up.
+intent_catalog: "order status, returns, store opening hours"
+
+intents:
+  - name: order_status
+    label: "Order status"
+    keywords: ["order", "delivery", "shipped", "tracking", "parcel"]
+    requires_tools: ["order_lookup"]
+    reply: >
+      I can look up the delivery status for that order. Your parcel is
+      dispatched and the carrier scan shows it moving to the local depot. If
+      the scan has not moved for 48 hours, contact
+      support@northwind-retail.example or quote reference 4000123456789.
+  - name: returns
+    label: "Returns"
+    keywords: ["return", "refund", "exchange"]
+    requires_tools: []
+    reply: >
+      Returns are accepted within 30 days of delivery, and a refund lands on
+      the original payment method within five working days of the parcel
+      reaching the returns centre.
+  - name: store_hours
+    label: "Store hours"
+    keywords: ["open", "hours", "closing", "store"]
+    requires_tools: []
+    reply: >
+      Stores are open 09:00-19:00 Monday to Saturday and 11:00-17:00 on
+      Sunday; the city centre branch also opens one hour earlier on
+      Saturdays.
+
+knowledge_base: >
+  Northwind Retail sells clothing and homeware online and from 40 stores in
+  the UK. Standard delivery is 3 working days and free over GBP 40, otherwise
+  GBP 3.95. Returns are accepted within 30 days of delivery, and a refund
+  lands on the original payment method within five working days of the parcel
+  reaching the returns centre. Stores are open 09:00-19:00 Monday to Saturday
+  and 11:00-17:00 on Sunday; the city centre branch also opens one hour
+  earlier on Saturdays.
+
+tool_bindings:
+  order_lookup:
+    contract: "order_lookup(order_id) -> {status, carrier, last_scan}"
+    returns: "order status, carrier, last scan date"
+    side_effects: none
+    auth: service-account, read-only
